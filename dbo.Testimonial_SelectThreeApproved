@@ -1,0 +1,33 @@
+USE [LeaseHold]
+GO
+/****** Object:  StoredProcedure [dbo].[Testimonial_SelectAllApproved]    Script Date: 3/30/2018 4:46:07 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Brian Song
+-- Create date: 12/7/2017
+-- Description:	dbo.Testimonial_SelectAllApproved
+-- =============================================
+ALTER PROCEDURE [dbo].[Testimonial_SelectAllApproved]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	/*
+	==TEST CODE
+	
+	EXEC dbo.Testimonial_SelectAllApproved
+
+	
+	*/
+
+	SELECT TOP 3 t.[Id], [ContentText], [IsApproved], [CreatedById], t.[CreatedDate], [IsArchived], [IsRejected]
+	, concat (FirstName, ' ',  LEFT ([LastName], 1), '.') as FullName
+	FROM dbo.Testimonial as t inner join dbo.UserProfile as up on up.Id = t.CreatedById
+	WHERE IsApproved = 1 and IsArchived = 0 and IsRejected = 0
+	ORDER BY CreatedDate desc
+END
