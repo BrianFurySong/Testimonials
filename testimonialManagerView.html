@@ -1,0 +1,39 @@
+<style>
+    .ibox-content {
+        border-radius: 8px 8px 8px 8px !important;
+        border-top-color: white;
+    }
+</style>
+
+<div class="ibox-content" style="">
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-1 menu">
+            <p></p>
+            <ul>
+                <li ng-click="$ctrl.showTestimonialList('new')">New Testimonials</li>
+                <li ng-click="$ctrl.showTestimonialList('approved')">Approved Testimonials</li>
+                <li ng-click="$ctrl.showTestimonialList('archived')">Archived Testimonials</li>
+                <li ng-click="$ctrl.showTestimonialList('rejected')">Rejected Testimonials</li>
+            </ul>
+        </div>
+        <div class="col-sm-7">
+            <h2 class="topBar text-center">{{$ctrl.testimonialName}}</h2>
+            <div class="well text-left" style="background-color:white; border-color:white;" ng-repeat="item in $ctrl.testimonialList">
+                <div><strong>Testimonial: </strong>{{item.contentText}}</div><br />
+                <div><strong>Name: </strong>{{item.fullName}}</div><br />
+                <div class="button btn-group pull-right">
+                    <div class="row">
+                        <button class="btn btn-xs btn-primary " type="button" title="Approve the Testimonials to the front page" ng-show="$ctrl.approveBtn" ng-click="$ctrl.testAction('approve', item)">Approve</button>
+                        <button class="btn btn-xs btn-danger" type="button" title="Delete the Testimonials forever" ng-hide="$ctrl.deleteBtn" ng-click="$ctrl.testAction('delete', item)">Delete</button>
+                        <button class="btn btn-xs btn-danger " type="button" title="Reject the Testimonials" ng-hide="$ctrl.rejectBtn" ng-click="$ctrl.testAction('reject', item)">Reject</button>
+                        <button class="btn btn-xs btn-primary " type="button" title="Archive the Testimonials" ng-hide="$ctrl.archiveBtn" ng-click="$ctrl.testAction('archive', item)">Archive</button>
+
+                        <br />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
